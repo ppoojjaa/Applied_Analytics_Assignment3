@@ -1,0 +1,226 @@
+---
+title: "Assignment3"
+bibliography: "references.bib"
+format:
+  html:
+    code-fold: true
+    toc: true
+#    embed-resources: true
+---
+
+## INTRODUCTION
+
+Hello! I'm *Pooja Gangapure*, and I've created an Quatro Document using **three datasets**. After extensive research, I successfully found 3 datasets that had common column. This assignment is done with financial data i.e., stocks in **S&P-500, Fortune 1000 companies, and S&P500 textual data**. The data is analyzed in both qualitative and quantitative way. **GLM regression** was used for quantitative analysis and was visualized by plotting in a *boxplot*.
+
+Secondly, *Topic modelling* was done with **Latent Dirichlet Allocation (LDA)** algorithm using topicmodels packages. I also visualized *wordcloud* for the textual data. Along with inferential model, I also ran descriptive statistics and visualized where most of the headquaters are located of the fortune 1000 companies.
+
+In my previous assignment I had mentioned cheapest penny stocks that a investor can buy, similarly here, I have found cheapest stocks available in both S&P 500 and Fortune 1000. Finally, the document ends with a mermaid code depicting how the tables were handled and a list of references used.
+
+### JOINING THE DATASETS
+
+```{r}
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(wordcloud)
+  library(ggplot2)
+  library(tm)
+  library(topicmodels)
+  library(leaflet)
+})
+
+#Read datasets 
+sp_metadata <- read.csv("Datasets/sp500_companies.csv")
+sp_text <- read.csv("Datasets/sp500_text.csv")
+fortune <- read.csv("Datasets/fortune_1000.csv") 
+geo_data <- read.csv("Datasets/uscities.csv")
+
+#Add prefix to columns 
+names(sp_metadata) <- paste("sp_meta_", names(sp_metadata), sep = "")
+names(sp_text) <- paste("sp_text_", names(sp_text), sep = "")
+names(fortune) <- paste("fortune_", names(fortune), sep = "")
+names(geo_data) <- paste("us_cities_", names(geo_data), sep = "")
+
+#change column name to join later 
+names(sp_metadata)[names(sp_metadata) == "sp_meta_Longname"] <- "CompanyName"
+names(sp_text)[names(sp_text) == "sp_text_Company.Name"] <- "CompanyName"
+names(fortune)[names(fortune) == "fortune_company"] <- "CompanyName"
+
+#change column name to join later 
+names(sp_metadata)[names(sp_metadata) == "sp_meta_City"] <- "City"
+names(geo_data)[names(geo_data) == "us_cities_city"] <- "City"
+
+# Join S&P 500 Textual Data with S&P 500 Company Metadata
+combined_sp <- inner_join(sp_metadata, sp_text, by = "CompanyName")
+# Join Fortune 500 Companies with S&P 500 Company Metadata
+final_data <- inner_join(combined_sp, fortune, by = "CompanyName")
+```
+
+<br><br>
+
+# QUANTITATIVE ANALYSIS
+
+Quantitative research is a type of research that collects and analyzes numerical data to test hypotheses and answer research questions. This research typically involves a large sample size and uses statistical analysis to make inferences about a population based on the data collected. @researchmethod_quantitative <br>
+
+### LINEAR REGRESSION AND RMSE
+
+```{r}
+# Set seed for reproducibility
+set.seed(123)
+
+# Split the dataset into a training set (80%) and a testing set (20%)
+train_indices <- sample(1:nrow(final_data), 0.8 * nrow(final_data))
+train_data <- final_data[train_indices, ]
+test_data <- final_data[-train_indices, ]
+
+# Fit a GLM model to predict revenue based on sector
+glm_model <- glm(fortune_revenue ~ sp_meta_Sector , data = train_data, family = gaussian)
+
+# Calculate  predictions and RMSE
+predictions <- predict(glm_model, newdata = test_data)
+rmse <- sqrt(mean((test_data$fortune_revenue - predictions)^2))
+print(paste("Root Mean Squared Error (RMSE):", rmse))
+```
+
+<br> Here, we can see that the RMSE value for Generalized Linear Model is **9262.45**. This is a subjectively small number because the values in the revenue stream are larger than usual. <br><br>
+
+### CHECK NORMALIZATION
+
+```{r}
+# Create a Q_Q plot to see normalization
+residuals <- residuals(glm_model)
+qqnorm(residuals)
+qqline(residuals)
+```
+
+<br> The Q-Q plot is used to check normalization. Unfortunately, not many variables fall on or near the normalization curve, indicating that the data is **not normally distributed**. <br><br>
+
+### REVENUE DISTRIBUTION
+
+```{r}
+# Create a boxplot of revenue by sector
+ggplot(final_data, aes(x = sp_meta_Sector, y = fortune_revenue)) +
+  geom_boxplot() +
+  labs(x = "Sector", y = "Revenue", title = "Revenue Across Sectors")
+```
+
+<br> The box plot shows the range of revenues in the particular sector. <br><br>
+
+# QUALITATIVE ANALYSIS
+
+Qualitative research involves collecting and analyzing non-numerical data (e.g., text, video, or audio) to understand concepts, opinions, or experiences. It can be used to gather in-depth insights into a problem or generate new ideas for research. @scribbr_qualitative <br>
+
+## TEXT MODELLING
+
+```{r warning=FALSE}
+# Extract text data 
+text_data <- final_data$sp_text_Text
+
+# Generalize text data
+corpus <- Corpus(VectorSource(text_data))
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stemDocument)
+
+# Create Term matrix
+dtm <- DocumentTermMatrix(corpus)
+
+# Fit model
+lda_model <- LDA(dtm, k = 6)
+
+# Find top terms for individual topic 
+terms <- terms(lda_model, 10)  
+
+terms
+```
+
+<br> Latent Dirichlet Allocation understands what subjects or ideas are present in the text data. Here, we can see the top terms for each of the six topics discovered by the LDA model. Each row represents a topic, and the columns contain the top terms associated with that topic. <br><br>
+
+## WORDCLOUD
+
+```{r warning=FALSE}
+#Preprocessing Input Data
+all_text <- paste(final_data$sp_text_Text, collapse = " ")
+all_text <- tolower(all_text)
+all_text <- gsub("[[:punct:]]", "", all_text)
+all_text <- gsub("\\d+", "", all_text)
+words <- strsplit(all_text, "\\s+")
+words <- unlist(words)
+
+# Create a word frequency table
+word_freq <- table(words)
+
+# Remove stopwords
+stop_words <- stopwords("en")  
+words <- words[!words %in% stop_words]
+
+# Create a word frequency table after removing stopwords
+word_freq <- table(words)
+
+#Set frequency
+min_freq <- 30
+filtered_word <- word_freq[word_freq >= min_freq]
+
+# Create a word cloud
+wordcloud(words = names(filtered_word), freq = filtered_word, min.freq = min_freq)
+
+```
+
+<br> A wordcloud is generated that helps finds words with greatest frequency. These words are often what grab customers attention and can be used in marketing campaigns. <br><br>
+
+# DISCRIPTIVE ANALYSIS
+
+```{r}
+# Stocks with lowest current market price
+top_10_lowest_price_stocks <- final_data %>%
+  arrange(sp_meta_Currentprice) %>%
+  slice_head(n = 10)
+
+# Create a bar chart
+bar_chart <- ggplot(top_10_lowest_price_stocks, aes(x = reorder(CompanyName, sp_meta_Currentprice), y = sp_meta_Currentprice)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  labs(title = "Top 10 Stocks with Lowest Current Prices", x = "Company Name", y = "Current Price") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+print(bar_chart)
+
+```
+
+<br> If a customer wants to invest in the cheapest stocks that are present in both, Fortune 1000 and S&P 500, he can invest in the stocks like U.S Bancorp, KeyCorp, Equity Residential, and other stocks mentioned above <br><br>
+
+## GEOGRAPHICAL DATA ANALYSIS USING LEAFLET
+
+```{r warning=FALSE}
+final_geo <- inner_join(final_data, geo_data, by = "City")
+# Create a leaflet map
+m <- leaflet() %>%
+  addTiles() # Add default tile layer (optional)
+
+# Add markers for latitude and longitude points from final_data1
+m <- addMarkers(map = m, data = final_geo, lat = ~us_cities_lat, lng = ~us_cities_lng)
+
+# Display the map
+m
+```
+
+<br> We can clearly see how most of the companies that fit in this union are from the east of US. <br><br>
+
+# MERMAID CODE
+
+<div style="text-align:center;">
+
+```{mermaid}
+graph TD;
+A[SP_Metadata] -->|Left Join| X[Combined_SP];
+B[SP_Text] -->|Left Join| X;
+X -->|Left Join| Y[Final_Data];
+C[Fortune_1000] -->|Left Join| Y;
+Y -->|Left Join| Z[Final_Data];
+D[Geo_Data] -->|Left Join| Z;
+
+```
+
+</div>
+
+<br> This is a mermaid code to visualize how the datasets have been handled. Now ofcourse, this is a model that I created. I integrated the datasets using the common variables i.e Company name for the first 3 tables and then City for combining the geographical dataset.I selected appropriate modelling approach like Text modelling and GLM for analytical reasons. While it may not be perfect, it helped me make informed decisions. <br><br>

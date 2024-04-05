@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Assignment3</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="Assignment3_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Assignment3_files/libs/quarto-html/quarto.js"></script>
+<script src="Assignment3_files/libs/quarto-html/popper.min.js"></script>
+<script src="Assignment3_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Assignment3_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Assignment3_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Assignment3_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Assignment3_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Assignment3_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Assignment3_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="Assignment3_files/libs/quarto-diagram/mermaid.min.js"></script>
+<script src="Assignment3_files/libs/quarto-diagram/mermaid-init.js"></script>
+<link href="Assignment3_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+<link href="Assignment3_files/libs/htmltools-fill-0.5.8/fill.css" rel="stylesheet">
+<script src="Assignment3_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="Assignment3_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="Assignment3_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="Assignment3_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="Assignment3_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="Assignment3_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="Assignment3_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="Assignment3_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="Assignment3_files/libs/leaflet-binding-2.2.2/leaflet.js"></script>
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">INTRODUCTION</a>
+  <ul class="collapse">
+  <li><a href="#joining-the-datasets" id="toc-joining-the-datasets" class="nav-link" data-scroll-target="#joining-the-datasets">JOINING THE DATASETS</a></li>
+  </ul></li>
+  <li><a href="#quantitative-analysis" id="toc-quantitative-analysis" class="nav-link" data-scroll-target="#quantitative-analysis">QUANTITATIVE ANALYSIS</a>
+  <ul class="collapse">
+  <li><a href="#linear-regression-and-rmse" id="toc-linear-regression-and-rmse" class="nav-link" data-scroll-target="#linear-regression-and-rmse">LINEAR REGRESSION AND RMSE</a></li>
+  <li><a href="#check-normalization" id="toc-check-normalization" class="nav-link" data-scroll-target="#check-normalization">CHECK NORMALIZATION</a></li>
+  <li><a href="#revenue-distribution" id="toc-revenue-distribution" class="nav-link" data-scroll-target="#revenue-distribution">REVENUE DISTRIBUTION</a></li>
+  </ul></li>
+  <li><a href="#qualitative-analysis" id="toc-qualitative-analysis" class="nav-link" data-scroll-target="#qualitative-analysis">QUALITATIVE ANALYSIS</a>
+  <ul class="collapse">
+  <li><a href="#text-modelling" id="toc-text-modelling" class="nav-link" data-scroll-target="#text-modelling">TEXT MODELLING</a></li>
+  <li><a href="#wordcloud" id="toc-wordcloud" class="nav-link" data-scroll-target="#wordcloud">WORDCLOUD</a></li>
+  </ul></li>
+  <li><a href="#discriptive-analysis" id="toc-discriptive-analysis" class="nav-link" data-scroll-target="#discriptive-analysis">DISCRIPTIVE ANALYSIS</a>
+  <ul class="collapse">
+  <li><a href="#geographical-data-analysis-using-leaflet" id="toc-geographical-data-analysis-using-leaflet" class="nav-link" data-scroll-target="#geographical-data-analysis-using-leaflet">GEOGRAPHICAL DATA ANALYSIS USING LEAFLET</a></li>
+  </ul></li>
+  <li><a href="#mermaid-code" id="toc-mermaid-code" class="nav-link" data-scroll-target="#mermaid-code">MERMAID CODE</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Assignment3</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">INTRODUCTION</h2>
+<p>Hello! I’m <em>Pooja Gangapure</em>, and I’ve created an Quatro Document using <strong>three datasets</strong>. After extensive research, I successfully found 3 datasets that had common column. This assignment is done with financial data i.e., stocks in <strong>S&amp;P-500, Fortune 1000 companies, and S&amp;P500 textual data</strong>. The data is analyzed in both qualitative and quantitative way. <strong>GLM regression</strong> was used for quantitative analysis and was visualized by plotting in a <em>boxplot</em>.</p>
+<p>Secondly, <em>Topic modelling</em> was done with <strong>Latent Dirichlet Allocation (LDA)</strong> algorithm using topicmodels packages. I also visualized <em>wordcloud</em> for the textual data. Along with inferential model, I also ran descriptive statistics and visualized where most of the headquaters are located of the fortune 1000 companies.</p>
+<p>In my previous assignment I had mentioned cheapest penny stocks that a investor can buy, similarly here, I have found cheapest stocks available in both S&amp;P 500 and Fortune 1000. Finally, the document ends with a mermaid code depicting how the tables were handled and a list of references used.</p>
+<section id="joining-the-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="joining-the-datasets">JOINING THE DATASETS</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(wordcloud)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(tm)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(topicmodels)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(leaflet)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Read datasets </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sp_metadata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Datasets/sp500_companies.csv"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>sp_text <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Datasets/sp500_text.csv"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>fortune <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Datasets/fortune_1000.csv"</span>) </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>geo_data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Datasets/uscities.csv"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#Add prefix to columns </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sp_metadata) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"sp_meta_"</span>, <span class="fu">names</span>(sp_metadata), <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sp_text) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"sp_text_"</span>, <span class="fu">names</span>(sp_text), <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fortune) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"fortune_"</span>, <span class="fu">names</span>(fortune), <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geo_data) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"us_cities_"</span>, <span class="fu">names</span>(geo_data), <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#change column name to join later </span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sp_metadata)[<span class="fu">names</span>(sp_metadata) <span class="sc">==</span> <span class="st">"sp_meta_Longname"</span>] <span class="ot">&lt;-</span> <span class="st">"CompanyName"</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sp_text)[<span class="fu">names</span>(sp_text) <span class="sc">==</span> <span class="st">"sp_text_Company.Name"</span>] <span class="ot">&lt;-</span> <span class="st">"CompanyName"</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(fortune)[<span class="fu">names</span>(fortune) <span class="sc">==</span> <span class="st">"fortune_company"</span>] <span class="ot">&lt;-</span> <span class="st">"CompanyName"</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#change column name to join later </span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sp_metadata)[<span class="fu">names</span>(sp_metadata) <span class="sc">==</span> <span class="st">"sp_meta_City"</span>] <span class="ot">&lt;-</span> <span class="st">"City"</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geo_data)[<span class="fu">names</span>(geo_data) <span class="sc">==</span> <span class="st">"us_cities_city"</span>] <span class="ot">&lt;-</span> <span class="st">"City"</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Join S&amp;P 500 Textual Data with S&amp;P 500 Company Metadata</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>combined_sp <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(sp_metadata, sp_text, <span class="at">by =</span> <span class="st">"CompanyName"</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Join Fortune 500 Companies with S&amp;P 500 Company Metadata</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(combined_sp, fortune, <span class="at">by =</span> <span class="st">"CompanyName"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p><br><br></p>
+</section>
+</section>
+<section id="quantitative-analysis" class="level1">
+<h1>QUANTITATIVE ANALYSIS</h1>
+<p>Quantitative research is a type of research that collects and analyzes numerical data to test hypotheses and answer research questions. This research typically involves a large sample size and uses statistical analysis to make inferences about a population based on the data collected. <span class="citation" data-cites="researchmethod_quantitative">Hassan (<a href="#ref-researchmethod_quantitative" role="doc-biblioref">2024</a>)</span> <br></p>
+<section id="linear-regression-and-rmse" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-and-rmse">LINEAR REGRESSION AND RMSE</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seed for reproducibility</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the dataset into a training set (80%) and a testing set (20%)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>train_indices <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(final_data), <span class="fl">0.8</span> <span class="sc">*</span> <span class="fu">nrow</span>(final_data))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> final_data[train_indices, ]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> final_data[<span class="sc">-</span>train_indices, ]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a GLM model to predict revenue based on sector</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>glm_model <span class="ot">&lt;-</span> <span class="fu">glm</span>(fortune_revenue <span class="sc">~</span> sp_meta_Sector , <span class="at">data =</span> train_data, <span class="at">family =</span> gaussian)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate  predictions and RMSE</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(glm_model, <span class="at">newdata =</span> test_data)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>rmse <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">mean</span>((test_data<span class="sc">$</span>fortune_revenue <span class="sc">-</span> predictions)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Root Mean Squared Error (RMSE):"</span>, rmse))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Root Mean Squared Error (RMSE): 9262.4527211569"</code></pre>
+</div>
+</div>
+<p><br> Here, we can see that the RMSE value for Generalized Linear Model is <strong>9262.45</strong>. This is a subjectively small number because the values in the revenue stream are larger than usual. <br><br></p>
+</section>
+<section id="check-normalization" class="level3">
+<h3 class="anchored" data-anchor-id="check-normalization">CHECK NORMALIZATION</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a Q_Q plot to see normalization</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">residuals</span>(glm_model)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(residuals)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Assignment3_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br> The Q-Q plot is used to check normalization. Unfortunately, not many variables fall on or near the normalization curve, indicating that the data is <strong>not normally distributed</strong>. <br><br></p>
+</section>
+<section id="revenue-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="revenue-distribution">REVENUE DISTRIBUTION</h3>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a boxplot of revenue by sector</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(final_data, <span class="fu">aes</span>(<span class="at">x =</span> sp_meta_Sector, <span class="at">y =</span> fortune_revenue)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Sector"</span>, <span class="at">y =</span> <span class="st">"Revenue"</span>, <span class="at">title =</span> <span class="st">"Revenue Across Sectors"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Assignment3_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br> The box plot shows the range of revenues in the particular sector. <br><br></p>
+</section>
+</section>
+<section id="qualitative-analysis" class="level1">
+<h1>QUALITATIVE ANALYSIS</h1>
+<p>Qualitative research involves collecting and analyzing non-numerical data (e.g., text, video, or audio) to understand concepts, opinions, or experiences. It can be used to gather in-depth insights into a problem or generate new ideas for research. <span class="citation" data-cites="scribbr_qualitative">Bhandari (<a href="#ref-scribbr_qualitative" role="doc-biblioref">2023</a>)</span> <br></p>
+<section id="text-modelling" class="level2">
+<h2 class="anchored" data-anchor-id="text-modelling">TEXT MODELLING</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract text data </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>text_data <span class="ot">&lt;-</span> final_data<span class="sc">$</span>sp_text_Text</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generalize text data</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">Corpus</span>(<span class="fu">VectorSource</span>(text_data))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, <span class="fu">content_transformer</span>(tolower))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removePunctuation)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removeNumbers)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, removeWords, <span class="fu">stopwords</span>(<span class="st">"english"</span>))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>corpus <span class="ot">&lt;-</span> <span class="fu">tm_map</span>(corpus, stemDocument)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Term matrix</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>dtm <span class="ot">&lt;-</span> <span class="fu">DocumentTermMatrix</span>(corpus)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>lda_model <span class="ot">&lt;-</span> <span class="fu">LDA</span>(dtm, <span class="at">k =</span> <span class="dv">6</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Find top terms for individual topic </span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>terms <span class="ot">&lt;-</span> <span class="fu">terms</span>(lda_model, <span class="dv">10</span>)  </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>terms</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Topic 1         Topic 2   Topic 3   Topic 4    Topic 5     Topic 6   
+ [1,] "compani"       "discov"  "stanley" "mgm"      "johnson"   "bank"    
+ [2,] "conocophillip" "card"    "morgan"  "compani"  "compani"   "bancorp" 
+ [3,] "oil"           "compani" "abbott"  "storag"   "product"   "offic"   
+ [4,] "gas"           "new"     "compani" "public"   "acquir"    "acquisit"
+ [5,] "product"       "servic"  "million" "casino"   "inc"       "nation"  
+ [6,] "state"         "financi" "firm"    "million"  "use"       "first"   
+ [7,] "edison"        "credit"  "announc" "phillip"  "announc"   "announc" 
+ [8,] "third"         "million" "manag"   "new"      "xamillion" "oregon"  
+ [9,] "conoco"        "util"    "busi"    "properti" "includ"    "branch"  
+[10,] "bank"          "electr"  "bank"    "grand"    "medic"     "compani" </code></pre>
+</div>
+</div>
+<p><br> Latent Dirichlet Allocation understands what subjects or ideas are present in the text data. Here, we can see the top terms for each of the six topics discovered by the LDA model. Each row represents a topic, and the columns contain the top terms associated with that topic. <br><br></p>
+</section>
+<section id="wordcloud" class="level2">
+<h2 class="anchored" data-anchor-id="wordcloud">WORDCLOUD</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Preprocessing Input Data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>all_text <span class="ot">&lt;-</span> <span class="fu">paste</span>(final_data<span class="sc">$</span>sp_text_Text, <span class="at">collapse =</span> <span class="st">" "</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>all_text <span class="ot">&lt;-</span> <span class="fu">tolower</span>(all_text)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>all_text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[[:punct:]]"</span>, <span class="st">""</span>, all_text)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>all_text <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>, <span class="st">""</span>, all_text)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(all_text, <span class="st">"</span><span class="sc">\\</span><span class="st">s+"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> <span class="fu">unlist</span>(words)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a word frequency table</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> <span class="fu">table</span>(words)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove stopwords</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>stop_words <span class="ot">&lt;-</span> <span class="fu">stopwords</span>(<span class="st">"en"</span>)  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> words[<span class="sc">!</span>words <span class="sc">%in%</span> stop_words]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a word frequency table after removing stopwords</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>word_freq <span class="ot">&lt;-</span> <span class="fu">table</span>(words)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#Set frequency</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>min_freq <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>filtered_word <span class="ot">&lt;-</span> word_freq[word_freq <span class="sc">&gt;=</span> min_freq]</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a word cloud</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="fu">wordcloud</span>(<span class="at">words =</span> <span class="fu">names</span>(filtered_word), <span class="at">freq =</span> filtered_word, <span class="at">min.freq =</span> min_freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Assignment3_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br> A wordcloud is generated that helps finds words with greatest frequency. These words are often what grab customers attention and can be used in marketing campaigns. <br><br></p>
+</section>
+</section>
+<section id="discriptive-analysis" class="level1">
+<h1>DISCRIPTIVE ANALYSIS</h1>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stocks with lowest current market price</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>top_10_lowest_price_stocks <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(sp_meta_Currentprice) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a bar chart</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>bar_chart <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_10_lowest_price_stocks, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(CompanyName, sp_meta_Currentprice), <span class="at">y =</span> sp_meta_Currentprice)) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill =</span> <span class="st">"skyblue"</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Top 10 Stocks with Lowest Current Prices"</span>, <span class="at">x =</span> <span class="st">"Company Name"</span>, <span class="at">y =</span> <span class="st">"Current Price"</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(bar_chart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="Assignment3_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><br> If a customer wants to invest in the cheapest stocks that are present in both, Fortune 1000 and S&amp;P 500, he can invest in the stocks like U.S Bancorp, KeyCorp, Equity Residential, and other stocks mentioned above <br><br></p>
+<section id="geographical-data-analysis-using-leaflet" class="level2">
+<h2 class="anchored" data-anchor-id="geographical-data-analysis-using-leaflet">GEOGRAPHICAL DATA ANALYSIS USING LEAFLET</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>final_geo <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(final_data, geo_data, <span class="at">by =</span> <span class="st">"City"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a leaflet map</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">leaflet</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="co"># Add default tile layer (optional)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Add markers for latitude and longitude points from final_data1</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">addMarkers</span>(<span class="at">map =</span> m, <span class="at">data =</span> final_geo, <span class="at">lat =</span> <span class="sc">~</span>us_cities_lat, <span class="at">lng =</span> <span class="sc">~</span>us_cities_lng)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the map</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-ef87a6c950be51e7f269" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-ef87a6c950be51e7f269">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addMarkers","args":[[40.487,42.3172,29.786,33.8963,37.3212,61.6159,40.2494,43.7583,38.9174,35.0349,40.6943,29.786,33.8963,37.3212,61.6159,40.2494,43.7583,38.9174,35.0349,44.9635,39.1243,33.5791,34.1819,43.1287,38.5935,39.7036,39.2706,31.368,42.7381,37.3342,34.9452,42.1723,34.0689,39.1413,36.0405,40.6309,41.8375,42.1155,37.1943,39.7709,39.93,44.0538,38.781,36.4949,30.1711,42.3246,37.6922,32.3636,42.8624,44.2372,41.0854,40.706,37.405,33.4967,30.4255,39.445,35.2729,42.6407,41.1039,33.0156,42.7595,40.1313,36.2333,35.6011,41.4764,35.1817,33.744,30.3381,34.597,36.3008,26.9529,43.9177,33.9964,35.7331,38.6788,43.2398,44.3236,39.3494,36.9434,41.5032,46.891],[-74.44499999999999,-87.8595,-95.38849999999999,-89.0031,-91.961,-149.8003,-80.211,-91.5706,-75.5039,-92.69450000000001,-73.92489999999999,-95.38849999999999,-89.0031,-91.961,-149.8003,-80.211,-91.5706,-75.5039,-92.69450000000001,-93.26779999999999,-97.69970000000001,-112.2311,-118.2468,-87.9277,-90.3826,-104.9352,-84.4584,-89.3086,-123.4294,-112.6035,-81.8364,-87.8951,-118.0823,-84.506,-94.5185,-92.9222,-87.6866,-72.5395,-93.2916,-89.654,-83.7959,-122.9811,-77.18389999999999,-86.8711,-85.60899999999999,-85.2371,-85.2193,-81.303,-97.8964,-94.9819,-96.13330000000001,-74.313,-102.6189,-81.2795,-90.5444,-78.69759999999999,-92.5549,-88.4135,-73.5585,-99.6716,-73.0562,-99.5945,-115.2654,-105.2206,-81.68049999999999,-84.8707,-90.7285,-95.0908,-83.76220000000001,-96.4635,-81.99250000000001,-87.7469,-86.5671,-80.68170000000001,-94.598,-75.88460000000001,-93.8353,-110.8556,-82.1527,-90.3171,-99.1195],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[26.9529,61.6159],"lng":[-149.8003,-72.5395]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p><br> We can clearly see how most of the companies that fit in this union are from the east of US. <br><br></p>
+</section>
+</section>
+<section id="mermaid-code" class="level1">
+<h1>MERMAID CODE</h1>
+<div style="text-align:center;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">graph TD;
+A[SP_Metadata] --&gt;|Left Join| X[Combined_SP];
+B[SP_Text] --&gt;|Left Join| X;
+X --&gt;|Left Join| Y[Final_Data];
+C[Fortune_1000] --&gt;|Left Join| Y;
+Y --&gt;|Left Join| Z[Final_Data];
+D[Geo_Data] --&gt;|Left Join| Z;
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p><br> This is a mermaid code to visualize how the datasets have been handled. Now ofcourse, this is a model that I created. I integrated the datasets using the common variables i.e Company name for the first 3 tables and then City for combining the geographical dataset.I selected appropriate modelling approach like Text modelling and GLM for analytical reasons. While it may not be perfect, it helped me make informed decisions. <br><br></p>
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-scribbr_qualitative" class="csl-entry" role="listitem">
+Bhandari, Pritha. 2023. <span>“What Is Qualitative Research? | Methods &amp; Examples.”</span> <a href="https://www.scribbr.com/methodology/qualitative-research/" class="uri">https://www.scribbr.com/methodology/qualitative-research/</a>.
+</div>
+<div id="ref-researchmethod_quantitative" class="csl-entry" role="listitem">
+Hassan, Muhammad. 2024. <span>“Quantitative Research - Methods, Types and Analysis.”</span> <a href="https://researchmethod.net/quantitative-research/" class="uri">https://researchmethod.net/quantitative-research/</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
